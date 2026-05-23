@@ -144,41 +144,51 @@ void cancelAppointment()
 
 void writePrescription()
 {
-    ofstream file("prescriptions.txt", ios::app);
+    ofstream pres("prescriptions.txt", ios::app);
+    ofstream hist("history.txt", ios::app);
 
     int id;
-    string medicine;
+    string disease, medicine;
 
     cout << "Enter Patient ID: ";
     cin >> id;
 
+    cout << "Enter Disease: ";
+    cin >> disease;
+
     cout << "Enter Medicine: ";
     cin >> medicine;
 
-    file << id << " " << medicine << endl;
+    pres << id << " " << medicine << endl;
 
-    cout << "Prescription Saved Successfully!\n";
+    hist << id << " "
+         << disease << " "
+         << medicine << endl;
 
-    file.close();
+    cout << "\nPrescription Saved!\n";
+
+    pres.close();
+    hist.close();
 }
 
 void viewHistory()
 {
-    ifstream file("prescriptions.txt");
+    ifstream file("history.txt");
 
     int id, searchID;
-    string medicine;
+    string disease, medicine;
 
     cout << "Enter Patient ID: ";
     cin >> searchID;
 
-    cout << "\n--- Patient History ---\n";
+    cout << "\n===== PATIENT HISTORY =====\n";
 
-    while(file >> id >> medicine)
+    while(file >> id >> disease >> medicine)
     {
         if(id == searchID)
         {
-            cout << "Medicine: " << medicine << endl;
+            cout << "Disease: " << disease
+                 << " | Medicine: " << medicine << endl;
         }
     }
 
