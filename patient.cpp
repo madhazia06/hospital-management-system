@@ -235,12 +235,21 @@ void removePatient()
     cout<<"record deleted successfully!"<<endl;
 }
 
+//=================================================PAUSE SCREEN=================================================
+void pauseScreen()
+{
+    cin.ignore(1000, '\n');
+    cout <<"\n Press Enter to continue!..... ";
+    cin.get();
+}
+
 //================================================PATIENT MENU======================================================
 void PatientMenu()
 {
     int choice;
     do
     {
+        system("cls");
         cout <<"\n ====================================" <<endl;
         cout <<"Patient Management System! " <<endl;
         cout << "=================================" <<endl;
@@ -257,18 +266,23 @@ void PatientMenu()
         {
             case 1:
                 addPatient();
+                pauseScreen();
                 break;
             case 2:
                 displayAllPatients();
+                pauseScreen();
                 break;
             case 3:
                 viewPatientHistory();
+                pauseScreen();
                 break;
             case 4:
                 searchPatientByName();
+                pauseScreen();
                 break;
             case 5:
                 removePatient();
+                pauseScreen();
                 break;
             case 6:
                 cout << "going out of the patient menu!";
@@ -283,6 +297,7 @@ void PatientMenu()
 int main()
 {
     loadFromFile();
+    system("color 0E");
     //addPatient();
     //displayAllPatients();
     //viewPatientHistory();
