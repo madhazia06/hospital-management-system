@@ -1,0 +1,13 @@
+2
+1
+Rameen
+18
+Typhoid
+Patient became ill on 25th of may 2025
+================================  1  ==============================
+2
+Maryam
+20
+Pnuemonia
+Patient became ill on 6th of March 2026
+================================  2  ==============================
