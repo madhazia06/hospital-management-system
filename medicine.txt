@@ -1,12 +1,96 @@
-1|Paracetamol 500mg|Getz Pharma|120|25|2027 
-2|Ibuprofen 400mg|Bayer|80|40|2026 
-3|Amoxicillin 250mg|GSK|100|60|2028
-4|Panadol Extra|Haleon|150|55|2027
-5|Cough Syrup|Bosch Phrama|60|90|2026
-6|Loratadine|Pfizer|110|35|2029
-7|Azithromycin 500mg|Searle Pakistan|70|120|2027
-8|Metformin 500mg|Sanofi|200|45|2028
-9|Omeprazole 20mg|Getz Pharma|140|50|2027
-10|Diclofenac 50mg|Novartis|90|30|2026
-11|Vitamin C 500mg|Abbott|300|20|2029
-12|Zinc Tablets|Nutrifactor|250|25|2028
+1
+Paracetamol 500mg
+Getz Pharma
+120
+25
+2027
+2
+Ibuprofen 400mg
+Bayer
+79
+40
+2026
+3
+Amoxicillin 250mg
+GSK
+7
+60
+2028
+4
+Panadol Extra
+Haleon
+150
+55
+2027
+5
+Cough Syrup
+Bosch Pharma
+60
+90
+2026
+6
+Loratadine
+Pfizer
+110
+35
+2029
+7
+Azithromycin 500mg
+Searle Pakistan
+70
+120
+2027
+8
+Metformin 500mg
+Sanofi
+199
+45
+2028
+9
+Omeprazole 20mg
+Getz Pharma
+140
+50
+2027
+10
+Diclofenac 50mg
+Novartis
+88
+30
+2026
+11
+Vitamin C 500mg
+Abbott
+300
+20
+2029
+12
+Zinc Tablets
+Nutrifactor
+250
+25
+2028
+13
+Neo-Mercazole (Carbimazole)
+Ray Pharma
+100
+280.94
+2027
+14
+Inderal
+Lucky Core Industries
+50
+25.9
+2027
+15
+Gaviscon
+Reckitt
+18
+280
+2028
+16
+Risek Insta Powder
+Getz Pharma
+30
+170.69
+2026
