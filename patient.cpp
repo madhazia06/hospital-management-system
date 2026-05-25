@@ -67,11 +67,11 @@ void addPatient()
         return ;
     }
     cout <<"-----enter new patient records-----"<<endl;
-    bool alreadyexists;
+    /*bool alreadyexists;
     do
     {
         alreadyexists=false;
-        cout << "enter patient id : ";
+        cout << "enter patient id, ID must be one plus to last ID in records in data file ";
         cin >> patientID[totalPatient];
         int tempID=patientID[totalPatient];
         for(int i=0; i<totalPatient; i++)
@@ -82,7 +82,8 @@ void addPatient()
                 alreadyexists=true;
             }
         }
-    }while(alreadyexists);
+    }while(alreadyexists);*/
+    patientID[totalPatient]=totalPatient+1;
     cout << "enter patient name : ";
     cin.ignore();
     getline(cin,patientName[totalPatient]);
