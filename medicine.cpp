@@ -101,7 +101,9 @@ void addNewMed()
         cin>>choice;
     } while(choice=="Yes"||choice=="yes"||choice=="YES");
 
-    fout.close();   
+    fout.close();
+    
+    
 }
 
 void viewAllMed()
