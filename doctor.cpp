@@ -1,6 +1,8 @@
 #include<iostream>
+#include<iomanip>
 #include<fstream>
 #include<cstdio>
+#include<windows.h>
 using namespace std;
 
 // Function Prototypes
@@ -13,22 +15,45 @@ void searchPatient();
 void dailySchedule();
 void addNotes();
 void viewReports();
+void header(string title);
+void pauseScreen();
 
+// Main Function
 int main()
 {
+    system("color 0B");
+
     menu();
 
     return 0;
 }
 
-// MENU FUNCTION
+// Function to display formatted section headers
+void header(string title)
+{
+    cout << "\n========================================\n";
+    cout << "         " << title << endl;
+    cout << "========================================\n";
+}
+
+// Function to pause screen until user presses Enter
+void pauseScreen()
+{
+    cin.ignore(1000, '\n');
+
+    cout << "\nPress Enter to continue...";
+    cin.get();
+}
+
+// Displays Main Menu for doctors pannel
 void menu()
 {
     int choice;
 
     do
     {
-        cout << "\n===== DOCTOR PANEL =====\n";
+       system("cls");
+       header("DOCTOR PANEL");
         cout << "1. View Appointments\n";
         cout << "2. Cancel Appointment\n";
         cout << "3. Write Prescription\n";
@@ -46,38 +71,51 @@ void menu()
         {
             case 1:
                 viewAppointments();
+                pauseScreen();
                 break;
 
             case 2:
                 cancelAppointment();
+                pauseScreen();
                 break;
 
             case 3:
                writePrescription();
+               pauseScreen();
                break;
 
             case 4:
                viewHistory();
+               pauseScreen();
                break;
 
             case 5:
                searchPatient();
+               pauseScreen();
                break;
 
             case 6:
                dailySchedule();
+               pauseScreen();
                break;
 
             case 7:
                addNotes();
+               pauseScreen();
                break;
 
             case 8:
                viewReports();
+               pauseScreen();
                break;
 
             case 9:
-                cout << "Logging out...\n";
+              cout << "\nLogging out";
+              for(int i = 0; i < 3; i++)
+              {
+                cout << ".";
+              }
+                cout << "\nThank you for using DOCTOR PANNEL of Hospital Management System!\n";
                 break;
 
             default:
@@ -87,37 +125,52 @@ void menu()
     } while(choice != 9);
 }
 
-// VIEW APPOINTMENTS
+// View Appointments Function
 void viewAppointments()
 {
+    header("VIEW APPOINTMENTS");
+
     ifstream file("appointments.txt");
 
     int id, priority;
     string name, date, status;
 
-    cout << "\n--- Appointments ---\n";
+    cout << left
+         << setw(10) << "ID"
+         << setw(15) << "Name"
+         << setw(18) << "Date"
+         << setw(15) << "Status"
+         << endl;
+
+    cout << "------------------------------------------------------\n";
 
     while(file >> id >> name >> date >> status >> priority)
     {
-        cout << id << " "
-             << name << " "
-             << date << " "
-             << status << endl;
+        cout << left
+             << setw(10) << id
+             << setw(15) << name
+             << setw(18) << date
+             << setw(15) << status
+             << endl;
     }
 
     file.close();
 }
 
-// CANCEL APPOINTMENT
+// Cancel Appointment Function
 void cancelAppointment()
 {
+    header("CANCEL APPOINTMENT");
+
     ifstream file("appointments.txt");
     ofstream temp("temp.txt");
 
-    int id, searchID, priority;
+    int id, priority, searchID;
     string name, date, status;
 
-    cout << "Enter ID to cancel: ";
+    bool found = false;
+
+    cout << "Enter Patient ID to cancel: ";
     cin >> searchID;
 
     while(file >> id >> name >> date >> status >> priority)
@@ -125,7 +178,9 @@ void cancelAppointment()
         if(id == searchID)
         {
             status = "Cancelled";
-            cout << "Appointment Cancelled!\n";
+            found = true;
+
+            cout << "\n[SUCCESS] Appointment Cancelled!\n";
         }
 
         temp << id << " "
@@ -135,6 +190,11 @@ void cancelAppointment()
              << priority << endl;
     }
 
+    if(found == false)
+    {
+        cout << "\n[ERROR] Patient ID not found!\n";
+    }
+
     file.close();
     temp.close();
 
@@ -142,6 +202,7 @@ void cancelAppointment()
     rename("temp.txt", "appointments.txt");
 }
 
+// Write Prescription Function
 void writePrescription()
 {
     ofstream pres("prescriptions.txt", ios::app);
@@ -171,6 +232,7 @@ void writePrescription()
     hist.close();
 }
 
+// View History Function
 void viewHistory()
 {
     ifstream file("history.txt");
@@ -195,8 +257,10 @@ void viewHistory()
     file.close();
 }
 
+// Search Patient Function
 void searchPatient()
 {
+    header("SEARCH PATIENT");
     ifstream file("patients.txt");
 
     int id, age, searchID;
@@ -230,8 +294,10 @@ void searchPatient()
     file.close();
 }
 
+// Daily Schedule Function
 void dailySchedule()
 {
+    header("DAILY SCHEDULE");
     ifstream file("appointments.txt");
 
     int id, priority;
@@ -256,8 +322,10 @@ void dailySchedule()
     file.close();
 }
 
+// Add Notes Function
 void addNotes()
 {
+    header("ADD NOTES");
     ofstream file("notes.txt", ios::app);
 
     int id;
@@ -278,8 +346,10 @@ void addNotes()
     file.close();
 }
 
+// View Reports Function
 void viewReports()
 {
+    header("REPORTS");
     ifstream file("appointments.txt");
 
     int id, priority;
