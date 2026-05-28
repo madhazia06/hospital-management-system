@@ -1,5 +1,5 @@
 101 Ali 2026-05-22 Booked 0
-102 Sara 2026-05-23 Booked 1
+102 Sara 2026-05-23 Cancelled 1
 103 Ahmed 2026-05-22 Cancelled 0
 104 Hina 2026-05-22 Booked 1
 105 Bilal 2026-05-24 Booked 0
