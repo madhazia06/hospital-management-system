@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include "common.h"
 #include "medicine.h"
+#include "doctor.h"
 
 using namespace std;
 
@@ -45,39 +46,41 @@ int main()
         header("HOSPITAL MANAGEMENT SYSTEM");
 
         //cout << "1. Admin Login" << endl;
-        cout << "1. Doctor Login" << endl;
-        cout << "2. Patient Portal Login" << endl;
+        cout << "1. Doctor Portal Login" << endl;
+        cout << "2. Admin Portal Login" << endl;
         cout << "3. Medicine Portal Login" << endl;
         cout << "4. Exit" << endl;
 
         choice=readInt("Enter choice: ");
 
-/*      
+      
         if(choice==1)
         {
             if(login("DOCTOR", "doctor", "doctor123"))
             {
+                system("color 0B");
                 doctorMenu();
             }
         }
-        else if(choice==2)
+ /*       else if(choice==2)
         {
-            if(login("PATIENT", "patient", "patient123"))
+            if(login("ADMIN", "admin", "admin123"))
             {
                 PatientMenu();
             }
-        }
-        else*/ if(choice==3)
+        }*/
+        else if(choice==3)
         {
             if(login("MEDICINE", "medicine", "med123"))
             {
+                system("color 0D");
                 medicineMenu();
             }
         }
         else if(choice==4)
         {
             cout << "Thank you for using Hospital Management System!" << endl;
-            
+            pauseScreen();
         }
         else
         {

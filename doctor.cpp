@@ -3,57 +3,20 @@
 #include<fstream>
 #include<cstdio>
 #include<windows.h>
+#include "doctor.h"
+#include "common.h"
+
 using namespace std;
 
-// Function Prototypes
-void menu();
-void viewAppointments();
-void cancelAppointment();
-void writePrescription();
-void viewHistory();
-void searchPatient();
-void dailySchedule();
-void addNotes();
-void viewReports();
-void header(string title);
-void pauseScreen();
-
-// Main Function
-int main()
-{
-    system("color 0B");
-
-    menu();
-
-    return 0;
-}
-
-// Function to display formatted section headers
-void header(string title)
-{
-    cout << "\n========================================\n";
-    cout << "         " << title << endl;
-    cout << "========================================\n";
-}
-
-// Function to pause screen until user presses Enter
-void pauseScreen()
-{
-    cin.ignore(1000, '\n');
-
-    cout << "\nPress Enter to continue...";
-    cin.get();
-}
-
 // Displays Main Menu for doctors pannel
-void menu()
+void doctorMenu()
 {
     int choice;
 
     do
     {
-       system("cls");
-       header("DOCTOR PANEL");
+        clearScreen();
+        header("DOCTOR PANEL");
         cout << "1. View Appointments\n";
         cout << "2. Cancel Appointment\n";
         cout << "3. Write Prescription\n";
@@ -64,8 +27,7 @@ void menu()
         cout << "8. View Reports\n";
         cout << "9. Logout\n";
 
-        cout << "Enter choice: ";
-        cin >> choice;
+        choice = readInt("Enter choice: ");
 
         switch(choice)
         {
@@ -120,6 +82,7 @@ void menu()
 
             default:
                 cout << "Feature not added yet!\n";
+                pauseScreen();
         }
 
     } while(choice != 9);
@@ -170,8 +133,7 @@ void cancelAppointment()
 
     bool found = false;
 
-    cout << "Enter Patient ID to cancel: ";
-    cin >> searchID;
+    searchID=readInt("Enter Patient ID to cancel: ");
 
     while(file >> id >> name >> date >> status >> priority)
     {
@@ -211,14 +173,12 @@ void writePrescription()
     int id;
     string disease, medicine;
 
-    cout << "Enter Patient ID: ";
-    cin >> id;
+    id=readInt("Enter Patient ID: ");
 
-    cout << "Enter Disease: ";
-    cin >> disease;
-
-    cout << "Enter Medicine: ";
-    cin >> medicine;
+    cout<<"Enter Disease: ";
+    cin>>disease;
+    cout<<"Enter Medicine: ";
+    cin>>medicine;
 
     pres << id << " " << medicine << endl;
 
@@ -240,10 +200,9 @@ void viewHistory()
     int id, searchID;
     string disease, medicine;
 
-    cout << "Enter Patient ID: ";
-    cin >> searchID;
+    searchID = readInt("Enter Patient ID: ");
 
-    cout << "\n===== PATIENT HISTORY =====\n";
+    header("PATIENT MEDICAL HISTORY");
 
     while(file >> id >> disease >> medicine)
     {
@@ -268,8 +227,7 @@ void searchPatient()
 
     bool found = false;
 
-    cout << "Enter Patient ID: ";
-    cin >> searchID;
+    searchID=readInt("Enter Patient ID: ");
 
     while(file >> id >> name >> age)
     {
@@ -304,8 +262,7 @@ void dailySchedule()
     string name, date, status;
     string today;
 
-    cout << "Enter Date (YYYY-MM-DD): ";
-    cin >> today;
+    today=readStringLine("Enter Date (YYYY-MM-DD): ");
 
     cout << "\n--- Daily Schedule ---\n";
 
@@ -331,13 +288,11 @@ void addNotes()
     int id;
     string note;
 
-    cout << "Enter Patient ID: ";
-    cin >> id;
+    id=readInt("Enter Patient ID: ");
 
     cin.ignore();
 
-    cout << "Enter Note: ";
-    getline(cin, note);
+    note=readStringLine("Enter Note: ");
 
     file << id << " " << note << endl;
 
@@ -380,8 +335,6 @@ void viewReports()
             emergency++;
         }
     }
-
-    cout << "\n===== REPORTS =====\n";
 
     cout << "Total Appointments: " << total << endl;
     cout << "Booked Appointments: " << booked << endl;
