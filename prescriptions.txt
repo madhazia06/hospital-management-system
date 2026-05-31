@@ -18,3 +18,4 @@
 109 Metrozine
 110 Claritek
 106 Panadol
+101 Inhaler
