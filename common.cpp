@@ -1,34 +1,41 @@
-#include<iostream> //Allows input and output
-#include<string> //Allows use of the string data type
-#include<cstdlib> //Provides system functions
-#include "common.h" //defined header file for multiple file handling
+#include<iostream> // Allows input and output using cin and cout
+#include<string> // Allows use of the string data type
+#include<cstdlib> // Provides system functions (Used here: system("cls"))
+#include "common.h" //defined header file for multiple file handling. Includes common function declarations
+
 using namespace std;
 
-void header(string title) //Displays a formatted heading/title.
+// This function displays a formatted heading/title
+void header(string title) 
 {
     cout << "\n========================================\n";
     cout << "         " << title << endl;
     cout << "========================================\n";
 }
 
-void clearScreen() //Clears console
+// This function clears the console screen
+void clearScreen()
 {
     system("cls");
 }
 
-void clearInput() //********************************!!!!!!!!!!!!Fixes invalid input problems.
+// This function clears invalid input from cin
+// Useful when user enters wrong input, like text instead of number
+void clearInput() 
 {
-    cin.clear();
-    cin.ignore(1000, '\n');
+    cin.clear(); // Clears the error state of cin
+    cin.ignore(1000, '\n'); // Removes leftover input from input buffer
 }
 
-void pauseScreen() //Stops screen before continuing.
+// This function pauses the screen until user presses Enter
+void pauseScreen() 
 {
     cout << "\nPress Enter to continue...";
     cin.get();
 }
 
-int readInt(string message) //********************!!!!!!!!!!!!!!!!!!!Safely takes integer input from user. 
+// This function safely takes integer input from user
+int readInt(string message)  
 {
     int value;
 
@@ -37,18 +44,21 @@ int readInt(string message) //********************!!!!!!!!!!!!!!!!!!!Safely take
         cout << message;
         cin >> value;
 
+        // If input is valid integer
         if(!cin.fail())
         {
-            clearInput();
+            clearInput(); //To remove leftover Enter/newline before returning
             return value;
         }
 
+        // If input is invalid
         cout << "Invalid input! Enter number only.\n";
         clearInput();
     }
 }
 
-double readDouble(string message) //********************!!!!!!!!!!!!!!!!!!!Safely takes decimal input from user.
+// This function safely takes decimal input from user
+double readDouble(string message)
 {
     double value;
 
@@ -57,18 +67,22 @@ double readDouble(string message) //********************!!!!!!!!!!!!!!!!!!!Safel
         cout << message;
         cin >> value;
 
+        // If input is valid decimal number
         if(!cin.fail())
         {
             clearInput();
             return value;
         }
 
+        // If input is invalid
         cout << "Invalid input! Enter valid amount.\n";
         clearInput();
     }
 }
 
-string readStringLine(string message) //****************!!!!!!!!!!!!!!!!!Takes full-line string input.
+// This function takes full-line string input from user
+// It can read names with spaces, like "Panadol Extra"
+string readStringLine(string message)
 {
     string value;
     cout << message;
