@@ -5,19 +5,6 @@
 #include<windows.h>
 using namespace std;
 
-// Function Prototypes
-void menu();
-void viewAppointments();
-void cancelAppointment();
-void writePrescription();
-void viewHistory();
-void searchPatient();
-void dailySchedule();
-void addNotes();
-void viewReports();
-void header(string title);
-void pauseScreen();
-
 // Main Function
 int main()
 {
@@ -45,6 +32,12 @@ void pauseScreen()
     cin.get();
 }
 
+// Function to change text color
+void setColor(int color)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+
 // Displays Main Menu for doctors pannel
 void menu()
 {
@@ -62,8 +55,8 @@ void menu()
         cout << "6. Daily Schedule\n";
         cout << "7. Add Notes\n";
         cout << "8. View Reports\n";
-        cout << "9. Logout\n";
-
+        cout << "9. Doctor Profile\n";
+        cout << "10. Logout\n";
         cout << "Enter choice: ";
         cin >> choice;
 
@@ -110,30 +103,39 @@ void menu()
                break;
 
             case 9:
+               doctorProfile();
+               pauseScreen();
+               break;
+
+            case 10:
               cout << "\nLogging out";
               for(int i = 0; i < 3; i++)
               {
                 cout << ".";
               }
-                cout << "\nThank you for using DOCTOR PANNEL of Hospital Management System!\n";
+                cout << "\nThank you for using DOCTOR PANNEL !\n";
                 break;
 
             default:
                 cout << "Feature not added yet!\n";
         }
 
-    } while(choice != 9);
+    } while(choice != 10);
 }
 
 // View Appointments Function
 void viewAppointments()
 {
     header("VIEW APPOINTMENTS");
-
     ifstream file("appointments.txt");
-
+    if(!file)
+   {
+    cout << "File not found!\n";
+    return;
+   }
     int id, priority;
     string name, date, status;
+    int total = 0;
 
     cout << left
          << setw(10) << "ID"
@@ -144,20 +146,47 @@ void viewAppointments()
 
     cout << "------------------------------------------------------\n";
 
+    // SHOW LEGEND ONLY ONCE
+    setColor(14);
+    cout << "[Yellow = Emergency Patient]\n";
+
+    setColor(12);
+    cout << "[Red = Cancelled Appointment]\n\n";
+
+
     while(file >> id >> name >> date >> status >> priority)
     {
-        cout << left
-             << setw(10) << id
-             << setw(15) << name
-             << setw(18) << date
-             << setw(15) << status
-             << endl;
-    }
+       cout << left
+     << setw(10) << id
+     << setw(15) << name
+     << setw(18) << date;
 
+     if(status == "Cancelled")
+      {
+        setColor(12); // Red
+      }
+     else
+      {
+        setColor(11); // Aqua
+      }
+
+     cout << setw(15) << status;
+     setColor(11);
+
+     if(priority == 1 && status != "Cancelled")
+      {
+       setColor(14);
+       cout << " [EMERGENCY]";
+       setColor(11);
+      }
+      total++;
+      cout << endl;
+    }
+    cout << "\nTotal Appointments: " << total << endl;
     file.close();
 }
 
-// Cancel Appointment Function
+// Function to cancel appointment
 void cancelAppointment()
 {
     header("CANCEL APPOINTMENT");
@@ -192,7 +221,7 @@ void cancelAppointment()
 
     if(found == false)
     {
-        cout << "\n[ERROR] Patient ID not found!\n";
+        cout << "\n[ERROR] Patient not found!\n";
     }
 
     file.close();
@@ -389,4 +418,18 @@ void viewReports()
     cout << "Emergency Patients: " << emergency << endl;
 
     file.close();
+}
+
+// Function to display doctor profile
+void doctorProfile()
+{
+    header("DOCTOR PROFILE");
+
+    cout << "Doctor ID      : D101\n";
+    cout << "Doctor Name    : Dr. Ahmad\n";
+    cout << "Specialization : Cardiologist\n";
+    cout << "Room Number    : 12\n";
+    cout << "Experience     : 5 Years\n";
+    cout << "Available Days : Mon - Fri\n";
+    cout << "Timing         : 10 AM - 5 PM\n";
 }
