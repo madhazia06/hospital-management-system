@@ -105,7 +105,7 @@ Hospital-Management-System
 ├── doctor.cpp
 ├── doctor.h
 │
-├── Admin.cpp
+├── admin.cpp
 ├── admin.h
 │
 ├── medicine.cpp
