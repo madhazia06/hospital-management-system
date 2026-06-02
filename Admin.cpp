@@ -669,9 +669,7 @@ void updateDoctorSalary()
 
 void hospitalPayrollReport() 
 {
-    cout << "\n==================================================\n";
-    cout << "            HOSPITAL PAYROLL REPORT\n";
-    cout << "==================================================\n";
+    header("HOSPITAL PAYROLL REPORT");
     if (totalDoctors == 0) {
         cout << "No doctors registered to generate payroll.\n";
         return;
