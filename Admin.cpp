@@ -723,8 +723,7 @@ void adminMenu()
         cout << "19. Hospital Payroll Report!" <<endl;
         cout << "20. Exit....." <<endl;
         cout << "==========================================" <<endl;
-        cout << "enter your choice (1-20) : ";
-        cin >> choice;
+        choice = readInt("enter your choice (1-20) : ");
         switch(choice)
         {
             case 1:
