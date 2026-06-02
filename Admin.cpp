@@ -370,6 +370,13 @@ void searchPatientByName()
     cout << "Enter Patient Name to search: ";
     //cin.ignore(); 
     getline(cin>>ws, searchName);
+    // DEBUGGING
+    cout << "\nYou entered = [" << searchName << "]" << endl;
+
+    for(int i = 0; i < totalPatient; i++)
+    {
+        cout << "Patient[" << i << "] = [" << patientName[i] << "]" << endl;
+    }
     
     cout << "\n================ Search Results ================" << endl;
     for(int i = 0; i < totalPatient; i++)
