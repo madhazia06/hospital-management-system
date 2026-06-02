@@ -19,7 +19,5 @@ void dailySchedule();
 void addNotes();
 // Displays reports such as appointment summaries and patient statistics
 void viewReports();
-// Displays the doctor's personal and professional information
-void doctorProfile();
 
 #endif

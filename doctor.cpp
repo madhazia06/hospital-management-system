@@ -31,8 +31,7 @@ void doctorMenu()
         cout << "6. Daily Schedule\n";
         cout << "7. Add Notes\n";
         cout << "8. View Reports\n";
-        cout << "9. Doctor Profile\n";
-        cout << "10. Logout\n";
+        cout << "9. Logout\n";
         choice=readInt("Enter choice: ");
 
 
@@ -79,11 +78,6 @@ void doctorMenu()
                break;
 
             case 9:
-               doctorProfile();
-               pauseScreen();
-               break;
-
-            case 10:
               cout << "\nLogging out";
               for(int i = 0; i < 3; i++)
               {
@@ -96,7 +90,7 @@ void doctorMenu()
                 cout << "Feature not added yet!\n";
         }
 
-    } while(choice != 10);
+    } while(choice != 9);
 }
 
 // View Appointments Function
@@ -396,16 +390,3 @@ void viewReports()
     file.close();
 }
 
-// Function to display doctor profile
-void doctorProfile()
-{
-    header("DOCTOR PROFILE");
-
-    cout << "Doctor ID      : D101\n";
-    cout << "Doctor Name    : Dr. Ahmad\n";
-    cout << "Specialization : Cardiologist\n";
-    cout << "Room Number    : 12\n";
-    cout << "Experience     : 5 Years\n";
-    cout << "Available Days : Mon - Fri\n";
-    cout << "Timing         : 10 AM - 5 PM\n";
-}
