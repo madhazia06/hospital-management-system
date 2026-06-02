@@ -4,6 +4,7 @@
 #include "common.h"
 #include "medicine.h"
 #include "doctor.h"
+#include "admin.h"
 
 using namespace std;
 
@@ -46,13 +47,13 @@ bool login(string portalName, string correctUser, string correctPass)
 
 int main()
 {
-    system("color 0A"); // Changes console text/background color
     int choice;
     // Main menu loop
     // This menu keeps showing until the user selects Exit
     do
     {
         clearScreen();
+        system("color 0A"); // Changes console text/background color
         header("HOSPITAL MANAGEMENT SYSTEM");
 
         // Main menu options
@@ -72,13 +73,16 @@ int main()
                 doctorMenu(); // Opens doctor menu after successful login
             }
         }
- /*       else if(choice==2)
+        else if(choice==2)
         {
             if(login("ADMIN", "admin", "admin123"))
             {
-                PatientMenu();
+                    P_loadFromFile();
+                    D_loadFromFile();
+                    system("color 0E");
+                    adminMenu();
             }
-        }*/
+        }
         else if(choice==3)
         {
             if(login("MEDICINE", "medicine", "med123"))

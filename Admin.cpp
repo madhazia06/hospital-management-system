@@ -2,7 +2,10 @@
 #include<string>
 #include<fstream>
 #include<iomanip>
+#include "admin.h"
+#include "common.h"
 using namespace std;
+
 int patientID[100];
 string patientName[100];
 int patientAge[100];
@@ -690,13 +693,6 @@ void hospitalPayrollReport()
     cout << "==================================================\n";
 }
 
-//=================================================PAUSE SCREEN=================================================
-void pauseScreen()
-{
-    cin.ignore(1000, '\n');
-    cout <<"\n Press Enter to continue!..... ";
-    cin.get();
-}
 
 //================================================PATIENT MENU======================================================
 void adminMenu()
@@ -817,7 +813,7 @@ void adminMenu()
         }
     }while(choice!=20);
 }
-int main()
+/*int main()
 {
     P_loadFromFile();
     D_loadFromFile();
@@ -829,3 +825,4 @@ int main()
     adminMenu();
     return 0;
 }
+*/

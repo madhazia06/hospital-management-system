@@ -1,11 +1,13 @@
 #ifndef DOCTOR_H
 #define DOCTOR_H
 
-//This header file contains declarations of all doctor-related functions.
-//These functions are defined in doctor.cpp.
+// Color function
+void setColor(int color);
 
-// Function Prototypes
-void menu();
+// Doctor menu
+void doctorMenu();
+
+// Doctor portal functions
 void viewAppointments();
 void cancelAppointment();
 void writePrescription();
@@ -15,8 +17,5 @@ void dailySchedule();
 void addNotes();
 void viewReports();
 void doctorProfile();
-void header(string title);
-void pauseScreen();
-void setColor(int color);
 
 #endif

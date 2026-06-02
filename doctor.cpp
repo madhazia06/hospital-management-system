@@ -3,34 +3,10 @@
 #include<fstream>
 #include<cstdio>
 #include<windows.h>
+#include "doctor.h"
+#include "common.h"
+
 using namespace std;
-
-// Main Function
-int main()
-{
-    system("color 0B");
-
-    menu();
-
-    return 0;
-}
-
-// Function to display formatted section headers
-void header(string title)
-{
-    cout << "\n========================================\n";
-    cout << "         " << title << endl;
-    cout << "========================================\n";
-}
-
-// Function to pause screen until user presses Enter
-void pauseScreen()
-{
-    cin.ignore(1000, '\n');
-
-    cout << "\nPress Enter to continue...";
-    cin.get();
-}
 
 // Function to change text color
 void setColor(int color)
@@ -39,7 +15,7 @@ void setColor(int color)
 }
 
 // Displays Main Menu for doctors pannel
-void menu()
+void doctorMenu()
 {
     int choice;
 
@@ -57,8 +33,8 @@ void menu()
         cout << "8. View Reports\n";
         cout << "9. Doctor Profile\n";
         cout << "10. Logout\n";
-        cout << "Enter choice: ";
-        cin >> choice;
+        choice=readInt("Enter choice: ");
+
 
         switch(choice)
         {
