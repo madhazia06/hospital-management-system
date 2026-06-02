@@ -74,10 +74,10 @@ void P_loadFromFile()
     for(int i = 0; i < totalPatient; i++)
     {
         inFile >> patientID[i];
-        inFile.ignore(); 
+        inFile>>ws; 
         getline(inFile, patientName[i]);
         inFile >> patientAge[i];
-        inFile.ignore();
+        inFile>>ws;
         getline(inFile, patientDisease[i]);
         getline(inFile, patientHitory[i]);
         getline(inFile, dummyLine);
@@ -97,10 +97,10 @@ void D_loadFromFile()
     for(int i = 0; i < totalDoctors; i++)
     {
         inFile >> doctorID[i];
-        inFile.ignore(); 
+        inFile>>ws; 
         getline(inFile, doctorName[i]);
         inFile >> doctorSalary[i];
-        inFile.ignore();
+        inFile>>ws;
         getline(inFile, doctorField[i]);
         getline(inFile, dummyLine);
 
