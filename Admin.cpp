@@ -372,7 +372,6 @@ void searchPatientByName()
     getline(cin>>ws, searchName);
     // DEBUGGING
     cout << "\nYou entered = [" << searchName << "]" << endl;
-
     for(int i = 0; i < totalPatient; i++)
     {
         cout << "Patient[" << i << "] = [" << patientName[i] << "]" << endl;
