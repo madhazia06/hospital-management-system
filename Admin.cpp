@@ -6,6 +6,7 @@
 #include "common.h"
 using namespace std;
 
+
 int patientID[100];
 string patientName[100];
 int patientAge[100];
