@@ -187,20 +187,6 @@ hospital.exe
 
 ---
 
-# 🎯 Learning Outcomes
-
-Through this project, we gained practical experience in:
-
-* File Handling in C++
-* Multifile Programming
-* Modular Software Design
-* Data Management Using Text Files
-* Team-Based Development
-* Problem Solving and Debugging
-* Menu-Driven Application Development
-
----
-
 # 👥 Team Members
 
 This project was developed by a team of three students as part of the **Programming Fundamentals (PF)** course.
