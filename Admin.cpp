@@ -1,7 +1,7 @@
-#include<iostream>
-#include<string>
-#include<fstream>
-#include<iomanip>
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <iomanip>
 #include "admin.h"
 #include "common.h"
 using namespace std;
