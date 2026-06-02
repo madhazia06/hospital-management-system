@@ -20,15 +20,15 @@ string doctorField[25];
 //============================================================DATA SAVE TO PATIENT FILE===========================================================
 void P_saveToFile()
 {
-    ofstream outFile("patients_data.txt"); // 
+    ofstream outFile("patients_data.txt"); 
     
     if(!outFile) {
-        cout << "Error: File couldn't open!" << endl;
+        cout << "Error: File couldn't open" << endl;
         return;
     }
     outFile << totalPatient << endl;
     
-    for(int i = 0; i < totalPatient; i++)
+    for(int i = 0; i<totalPatient && i<100; i++)
     {
         outFile << patientID[i] << endl;
         outFile << patientName[i] << endl;
@@ -46,11 +46,11 @@ void D_saveToFile()
     ofstream outFile("doctors_data.txt"); // 
     
     if(!outFile) {
-        cout << "Error: File couldn't open!" << endl;
+        cout << "Error: File couldn't open" << endl;
         return;
     }
     outFile << totalDoctors << endl;
-    for(int i = 0; i < totalDoctors; i++)
+    for(int i = 0; i < totalDoctors && i<25; i++)
     {
         outFile << doctorID[i] << endl;
         outFile << doctorName[i] << endl;
@@ -70,14 +70,21 @@ void P_loadFromFile()
         return; 
     }
     inFile >> totalPatient; 
+    if(totalPatient > 100)
+    {
+        totalPatient = 100;
+    }
     string dummyLine;
     for(int i = 0; i < totalPatient; i++)
     {
         inFile >> patientID[i];
-        inFile.ignore(); 
+        inFile.ignore();
+
         getline(inFile, patientName[i]);
+        
         inFile >> patientAge[i];
         inFile.ignore();
+        
         getline(inFile, patientDisease[i]);
         getline(inFile, patientHitory[i]);
         getline(inFile, dummyLine);
@@ -93,14 +100,23 @@ void D_loadFromFile()
         return; 
     }
     inFile >> totalDoctors; 
+
+    if(totalDoctors > 25)
+    {
+        totalDoctors = 25;
+    }
+
     string dummyLine;
     for(int i = 0; i < totalDoctors; i++)
     {
         inFile >> doctorID[i];
         inFile.ignore(); 
+
         getline(inFile, doctorName[i]);
+        
         inFile >> doctorSalary[i];
         inFile.ignore();
+        
         getline(inFile, doctorField[i]);
         getline(inFile, dummyLine);
 
@@ -111,93 +127,78 @@ void D_loadFromFile()
 //===========================================================ADD PATIENT RECORD======================================================
 void addPatient()
 {
-    header("Add Patient Record!");
+    header("Add Patient Record");
     if(totalPatient>=100)
     {
-        cout << "hospitals' capacity is full!"<<endl;
-        return ;
+        cout << "Hospital's capacity is full"<<endl;
+        return;
     }
-    cout <<"-----enter new patient records-----"<<endl;
-    /*bool alreadyexists;
-    do
-    {
-        alreadyexists=false;
-        cout << "enter patient id, ID must be one plus to last ID in records in data file ";
-        cin >> patientID[totalPatient];
-        int tempID=patientID[totalPatient];
-        for(int i=0; i<totalPatient; i++)
-        {
-            if(patientID[i]==patientID[totalPatient])
-            {
-                cout << "this ID already belong to a patient. Now enter new ID for this patient : " <<endl;
-                alreadyexists=true;
-            }
-        }
-    }while(alreadyexists);*/
+    
     patientID[totalPatient]=totalPatient+1;
-    cin.ignore();
-    cout << "enter patient name : ";
-    getline(cin,patientName[totalPatient]);
-    cout << "enter age of patient : ";
-    cin >>patientAge[totalPatient];
-     while(patientAge[totalPatient]<=0||patientAge[totalPatient]>200)
+    patientName[totalPatient] = readStringLine("Enter patient name: ");
+    patientAge[totalPatient] = readInt("Enter age of patient: ");
+    
+    while(patientAge[totalPatient]<=0 || patientAge[totalPatient]>200)
     { 
-        cout <<"kindly enter valid patient age : ";
-        cin >> patientAge[totalPatient];
+        cout <<"Kindly enter valid patient age."<<endl;
+        patientAge[totalPatient] = readInt("Enter age of patient: ");
     }
-    cin.ignore();
-    cout << "enter disease of patient : ";
-    getline(cin,patientDisease[totalPatient]);
-    cout << "enter history of patient : ";
-    //cin.ignore();
-    getline (cin, patientHitory[totalPatient]);
+    
+    patientDisease[totalPatient] = readStringLine("Enter disease of patient: ");
+    patientHitory[totalPatient] = readStringLine("Enter history of patient: ");
+    
     totalPatient++;
     P_saveToFile();
-    cout << "Patient's record add successfully  to file!" << endl;
+    cout << "Patient's record add successfully to file!" << endl;
 }
 //===========================================================ADD DOCTOR RECORD=======================================================
 void addDoctor()
 {
-    header("Add Doctor Record!");
+    header("Add Doctor Record");
     if(totalDoctors>=25)
     {
-        cout << "hospitals' capacity is full!"<<endl;
+        cout << "Hospital's capacity is full."<<endl;
         return ;
     }
-    cout <<"-----enter new doctor record-----"<<endl;
-    doctorID[totalDoctors]=totalDoctors+1;
-    cout << "enter Doctor name : ";
-    cin.ignore();
-    getline(cin,doctorName[totalDoctors]);
-    cout << "enter salary of the doctor : " ;
-    cin >> doctorSalary[totalDoctors];
-    cout << "enter field of the doctor : " ;
-    cin.ignore();
-    getline(cin,doctorField[totalDoctors]);
+    
+    doctorID[totalDoctors] = totalDoctors + 1;
+
+    doctorName[totalDoctors] = readStringLine("Enter doctor name: ");
+
+    doctorSalary[totalDoctors] = readInt("Enter salary of the doctor (PKR): ");
+
+    while(doctorSalary[totalDoctors] <= 0)
+    {
+        cout << "Kindly enter valid doctor salary." << endl;
+        doctorSalary[totalDoctors] = readInt("Enter salary of the doctor: ");
+    }
+
+    doctorField[totalDoctors] = readStringLine("enter field of the doctor : ");
+
     totalDoctors++;
     D_saveToFile();
-    cout << "Doctor's record add successfully to file!" << endl;
-
+    cout << "Doctor's record added successfully to file." << endl;
 }
 
 //=================================================DISPLAY ALL PATIENTS=====================================================================
 void displayAllPatients()
 {
-    header("Display All Patients!");
+    header("Display All Patients");
     if(totalPatient==0)
     {
-        cout << "there is no patient in the hospital!"<<endl;
+        cout << "There is no patient in the hospital."<<endl;
+        return;
     }
     cout <<"\n ======================================================"<<endl;
-    cout << "records of all patients in the hospital !"<<endl;
+    cout << "Records of all patients in the hospital."<<endl;
     for(int i=0; i<totalPatient; i++)
     {
-        cout << "patient no. "  <<i+1 <<endl;
-        cout <<"ID : " <<patientID[i] <<endl;
-        cout << "Name : " <<patientName[i] << endl;
-        cout << "Age : " << patientAge[i] <<endl;
-        cout << "Disease : " <<patientDisease[i] <<endl;
-        cout << "History : " <<patientHitory[i] <<endl;
+        cout << "\nPatient No.: "  <<i+1 <<endl;
+        cout <<"ID: " <<patientID[i] <<endl;
+        cout << "Name: " <<patientName[i] << endl;
+        cout << "Age: " << patientAge[i] <<endl;
+        cout << "Disease: " <<patientDisease[i] <<endl;
+        cout << "History: " <<patientHitory[i] <<endl;
         cout << "----------------------------------------" <<endl;
 
     }
@@ -205,20 +206,21 @@ void displayAllPatients()
 //=================================================DISPLAY ALL DOCTORS======================================================================
 void displayAllDoctors()
 {
-    header("Display All Doctors!");
+    header("Display All Doctors");
     if(totalDoctors==0)
     {
-        cout << "there is no doctor in the hospital!"<<endl;
+        cout << "There is no doctor working in the hospital."<<endl;
+        return;
     }
     cout <<"\n ======================================================"<<endl;
-    cout << "records of all doctors in the hospital !"<<endl;
+    cout << "Records of all doctors in the hospital"<<endl;
     for(int i=0; i<totalDoctors; i++)
     {
-        cout << "Doctor no. "  <<i+1 <<endl;
-        cout <<"ID : " <<doctorID[i] <<endl;
-        cout << "Name : " <<doctorName[i] << endl;
-        cout << "Salary : " << doctorSalary[i] << endl;
-        cout << "Field : " <<doctorField[i] <<endl;
+        cout << "\nDoctor No.: "  <<i+1 <<endl;
+        cout <<"ID: " <<doctorID[i] <<endl;
+        cout << "Name: " <<doctorName[i] << endl;
+        cout << "Salary: " << doctorSalary[i] << endl;
+        cout << "Field: " <<doctorField[i] <<endl;
         cout << "----------------------------------------" <<endl;
 
     }
@@ -227,27 +229,26 @@ void displayAllDoctors()
 //=========================================================VIEW PATIENT HISTORY==============================================================
 void viewPatientHistory()
 {
-    header("View Patient History!");
+    header("View Patient History");
     if(totalPatient==0)
     {
-        cout << "there is not any patient's record in the hospital whom record can be searched!"<<endl;
+        cout << "There is no patient record in the hospital to search."<<endl;
         return ;
     }
-    int searchID;
+    int searchID = readInt("Enter ID of the patient to view history: ");
     bool found = false;
-    cout <<"enter ID of the patient to view history:";
-    cin >> searchID;
+    
     for(int i=0; i<totalPatient; i++)
     {
         if(patientID[i]==searchID)
         {
             cout <<"=======================" <<endl;
-            cout << "patient ID Found!" <<endl;
-            cout <<"ID : " <<patientID[i] <<endl;
-            cout << "Name : " <<patientName[i] << endl;
-            cout << "Age : " << patientAge[i] <<endl;
-            cout << "Disease : " <<patientDisease[i] <<endl;
-            cout << "History : " <<patientHitory[i] <<endl;
+            cout << "Patient ID Found!" <<endl;
+            cout <<"ID: " <<patientID[i] <<endl;
+            cout << "Name: " <<patientName[i] << endl;
+            cout << "Age: " << patientAge[i] <<endl;
+            cout << "Disease: " <<patientDisease[i] <<endl;
+            cout << "History: " <<patientHitory[i] <<endl;
             found = true;
             break;
         }
@@ -260,26 +261,26 @@ void viewPatientHistory()
 //=========================================================vIEW DOCTOR HISTORY===============================================================
 void viewDoctorHistory()
 {
-    header("View Doctor History!");
+    header("View Doctor History");
     if(totalDoctors==0)
     {
-        cout << "there is not any patient's record in the hospital whom record can be searched!"<<endl;
-        return ;
+        cout << "There is no doctor record in the hospital to search."<<endl;
+        return;
     }
-    int searchID;
+    int searchID = readInt("Enter ID of the doctor to view doctor's history: ");
     bool found = false;
-    cout <<"enter ID of the doctor to view doctor's history:";
-    cin >> searchID;
+
     for(int i=0; i<totalDoctors; i++)
     {
         if(doctorID[i]==searchID)
         {
             cout <<"=======================" <<endl;
-            cout << "doctor ID Found!" <<endl;
-            cout <<"ID : " << doctorID[i] <<endl;
-            cout << "Name : " << doctorName[i] << endl;
-            cout << "Salary : " << doctorSalary[i] <<endl;
-            cout << "Filed : " << doctorField[i] << endl;
+            cout << "Doctor ID Found!" <<endl;
+            cout <<"ID: " << doctorID[i] <<endl;
+            cout << "Name: " << doctorName[i] << endl;
+            cout << "Salary: " << doctorSalary[i] <<endl;
+            cout << "Field: " << doctorField[i] << endl;
+            
             found = true;
             break;
         }
@@ -293,83 +294,78 @@ void viewDoctorHistory()
 //======================================================SEARCH PAATIENT BY ID==========================================================================
 void searchPatientById()
 {
-    header("Search Patient by ID!");
+    header("Search Patient by ID");
     if(totalPatient==0)
     {
-        cout << "there is not any patient's record in the hospital whom record can be searched!"<<endl;
+        cout << "There is no patient record in the hospital to search."<<endl;
         return ;
     }
-    int searchID;
+    int searchID = readInt("Enter ID of the patient to search: ");
     bool found = false;
-    cout <<"enter ID of the patient to search!";
-    cin >> searchID;
+    
     for(int i=0; i<totalPatient; i++)
     {
         if(patientID[i]==searchID)
         {
             cout <<"=======================" <<endl;
             cout << "patient ID Found!" <<endl;
-            cout <<"ID : " <<patientID[i] <<endl;
-            cout << "Name : " <<patientName[i] << endl;
-            cout << "Age : " << patientAge[i] <<endl;
-            cout << "Disease : " <<patientDisease[i] <<endl;
-            cout << "History : " <<patientHitory[i] <<endl;
+            cout <<"ID: " <<patientID[i] <<endl;
+            cout << "Name: " <<patientName[i] << endl;
+            cout << "Age: " << patientAge[i] <<endl;
+            cout << "Disease: " <<patientDisease[i] <<endl;
+            cout << "History: " <<patientHitory[i] <<endl;
             found = true;
             break;
         }
     }
     if(found==false)
     {
-        cout << "History/Record of ID " <<searchID << " not found!"<<endl;
+        cout << "Record of ID " <<searchID << " not found!"<<endl;
     }
 }
 //=========================================================SEARCH DOCTOR BY ID===============================================================
 void searchDoctorById()
 {
-    header("Search Doctor by Name!");
+    header("Search Doctor by ID");
     if(totalDoctors==0)
     {
-        cout << "there is not any patient's record in the hospital whom record can be searched!"<<endl;
-        return ;
+        cout << "There is no doctor record in the hospital to search."<<endl;
+        return;
     }
-    int searchID;
+    int searchID = readInt("Enter ID of the doctor to search: ");
     bool found = false;
-    cout <<"enter ID of the doctor to search!";
-    cin >> searchID;
+    
     for(int i=0; i<totalDoctors; i++)
     {
         if(doctorID[i]==searchID)
         {
             cout <<"=======================" <<endl;
-            cout << "doctor ID Found!" <<endl;
-            cout <<"ID : " << doctorID[i] <<endl;
-            cout << "Name : " << doctorName[i] << endl;
-            cout << "Salary : " << doctorSalary[i] <<endl;
-            cout << "Filed : " << doctorField[i] << endl;
+            cout << "Doctor ID Found!" <<endl;
+            cout <<"ID: " << doctorID[i] <<endl;
+            cout << "Name: " << doctorName[i] << endl;
+            cout << "Salary: " << doctorSalary[i] <<endl;
+            cout << "Field: " << doctorField[i] << endl;
             found = true;
             break;
         }
     }
     if(found==false)
     {
-        cout << "History/Record of ID " <<searchID << " not found!"<<endl;
+        cout << "Record of ID " <<searchID << " not found!"<<endl;
     }
 }
 //=======================================================SEARCH PATIENT BY NAME========================================================================
 
 void searchPatientByName()
 {
-    header("Search Patient by Name!");
+    header("Search Patient by Name");
     if(totalPatient == 0)
     {
-        cout << "Hospital mein koi record nahi hai!" << endl;
+        cout << "There is no patient record in the hospital." << endl;
         return;
     }
-    string searchName;
+    string searchName = readStringLine("Enter patient name to search: ");
     bool found = false;
-    cout << "Enter Patient Name to search: ";
-    cin.ignore(); 
-    getline(cin, searchName);
     
     cout << "\n================ Search Results ================" << endl;
     for(int i = 0; i < totalPatient; i++)
@@ -389,23 +385,20 @@ void searchPatientByName()
     
     if(!found)
     {
-        cout << "there is not any patient names " <<searchName <<" ! " << endl;
+        cout << "There is no patient named " <<searchName <<"." << endl;
     }
 }
 //=======================================================SEARCH DOCTOR BY NAME=========================================================================
 void searchDoctorByName()
 {
-    header("Search Doctor by Name!");
+    header("Search Doctor by Name");
     if(totalDoctors == 0)
     {
-        cout << "There is not any Doctor in the hospital!" << endl;
+        cout << "There is no doctor record in the hospital." << endl;
         return;
     }
-    string searchName;
+    string searchName = readStringLine("Enter Doctor Name to search: ");
     bool found = false;
-    cout << "Enter Doctor Name to search : ";
-    cin.ignore(); 
-    getline(cin, searchName);
     
     cout << "\n================ Search Results ================" << endl;
     
@@ -425,25 +418,23 @@ void searchDoctorByName()
     
     if(!found)
     {
-        cout << "there is not any doctors named " <<searchName <<" ! " << endl;
+        cout << "There is no doctor named " <<searchName <<"." << endl;
     }
 }
 
 //=============================================REMOVE PATIENT RECORD===================================================================
 void removePatient()
 {
+    header("Remove Patient Record");
     if(totalPatient==0)
     {
-        cout <<"there is not any record in the hospital which could be delete!" <<endl;
+        cout <<"There is no patient record in the hospital to delete." <<endl;
         return;
     }
-    int deleteID;
-    //cout <<"\n============================================" <<endl;
-    //cout << "======= Remove Patient Record! ========" <<endl;
-    header("Remove Patient Record");
-    cout << "enter patient ID to remove: ";
-    cin >> deleteID;
+    
+    int deleteID = readInt("Enter patient ID to remove: ");
     int foundIndex=-1;
+    
     for(int i=0; i<totalPatient; i++)
     {
         if(patientID[i]==deleteID)
@@ -454,35 +445,33 @@ void removePatient()
     }
     if(foundIndex==-1)
     {
-        cout << "There is not any Patient having ID " <<deleteID <<endl;
+        cout << "There is no Patient having ID " <<deleteID <<endl;
         return ;
     }
     for(int i=foundIndex; i<totalPatient-1; i++)
     {
-        patientName[i]=patientName[i+1];
-        patientAge[i]=patientAge[i+1];
-        patientDisease[i]=patientDisease[i+1];
-        patientHitory[i]=patientHitory[i+1];
+        patientID[i] = patientID[i + 1];
+        patientName[i] = patientName[i + 1];
+        patientAge[i] = patientAge[i + 1];
+        patientDisease[i] = patientDisease[i + 1];
+        patientHitory[i] = patientHitory[i + 1];
     }
     totalPatient--;
     P_saveToFile();
-    cout<<"Patient's record deleted successfully!"<<endl;
+    cout<<"Patient's record deleted successfully."<<endl;
 }
 //=============================================REMOOVE DOCTOR RECORD===================================================================
 void removeDoctor()
 {
+    header("Remove Doctor Record!");
     if(totalDoctors==0)
     {
-        cout <<"there is not any doctor's record in the hospital which could be delete!" <<endl;
+        cout <<"There is no doctor record in the hospital to delete." <<endl;
         return;
     }
-    int deleteID;
-    //cout <<"\n============================================" <<endl;
-    //cout << "======= Remove Doctor Record! ========" <<endl;
-    //cout << "enter Doctor ID to remove: ";
-    header("Remove Doctor Record!");
-    cin >> deleteID;
+    int deleteID = readInt("Enter Doctor ID to remove: ");
     int foundIndex=-1;
+
     for(int i=0; i<totalDoctors; i++)
     {
         if(doctorID[i]==deleteID)
@@ -493,15 +482,16 @@ void removeDoctor()
     }
     if(foundIndex==-1)
     {
-        cout << "There is not any Doctor having ID " <<deleteID <<endl;
+        cout << "There is no doctor having ID " <<deleteID <<endl;
         return ;
     }
+
     for(int i=foundIndex; i<totalDoctors-1; i++)
     {
-        doctorID[i]=doctorID[i];
-        doctorName[i]=doctorName[i+1];
-        doctorSalary[i]=doctorSalary[i+1];
-        doctorField[i]=doctorField[i+1];
+        doctorID[i] = doctorID[i + 1];
+        doctorName[i] = doctorName[i + 1];
+        doctorSalary[i] = doctorSalary[i + 1];
+        doctorField[i] = doctorField[i + 1];
     }
     totalDoctors--;
     D_saveToFile();
@@ -511,31 +501,36 @@ void removeDoctor()
 
 void updatePatientRecord() 
 {
-    int id;
     header("UPDATE PATIENT RECORD");
-    cout << "Enter Patient ID to update: ";
-    cin >> id;
+    
+    if(totalPatient == 0)
+    {
+        cout << "There is no patient record in the hospital to update!" << endl;
+        return;
+    }
+    int id = readInt("Enter Patient ID to update: ");
 
     bool found = false;
     for (int i = 0; i < totalPatient; i++) {
         if (patientID[i] == id) {
             found = true;
-            cout << "\nCurrent Details:\n";
-            cout << "Name: " << patientName[i] << " | Disease: " << patientDisease[i] << "\n";
             
-            cout << "\nEnter New Details:\n";
-            cout << "Enter New Name: ";
-            cin.ignore();
-            getline(cin, patientName[i]);
-            cout << "Enter New Age: ";
-            cin >> patientAge[i];
-            cout << "Enter New Disease: ";
-            cin.ignore();
-            getline(cin, patientDisease[i]);
-            cout << "Enter New History: ";
-            getline(cin, patientHitory[i]);
+            cout << "\nCurrent Details:" << endl;
+            cout << "Name: " << patientName[i] << " | Disease: " << patientDisease[i] << endl;
+            cout << "\nEnter New Details:" << endl;
+            patientName[i] = readStringLine("Enter New Name: ");
+            patientAge[i] = readInt("Enter New Age: ");
+            while(patientAge[i] <= 0 || patientAge[i] > 200)
+            {
+                cout << "Kindly enter valid patient age." << endl;
+                patientAge[i] = readInt("Enter New Age: ");
+            }
+            patientDisease[i] = readStringLine("Enter New Disease: ");
+            patientHitory[i] = readStringLine("Enter New History: ");
+            
             P_saveToFile();
-            cout << "\nPatient record updated successfully and saved to file!\n";
+
+            cout << "\nPatient record updated successfully and saved to file!" << endl;
             break;
         }
     }
@@ -547,35 +542,47 @@ void updatePatientRecord()
 //================================================UPDATE DOCTOOR RECORD====================================================================
 void updateDoctorRecord() 
 {
-    int id;
-    /*cout << "\n====================================\n";
-    cout << "       UPDATE DOCTOR RECORD\n";
-    cout << "====================================\n";*/
     header("UPDATE DOCTOR RECORD");
-    cout << "Enter Doctor ID to update: ";
-    cin >> id;
+    
+    if(totalDoctors == 0)
+    {
+        cout << "There is no doctor record in the hospital to update!" << endl;
+        return;
+    }
+
+    int id = readInt("Enter Doctor ID to update: ");
+
     bool found = false;
+
     for (int i = 0; i < totalDoctors; i++) {
-        if (doctorID[i] == id) {
+        if (doctorID[i] == id) 
+        {
             found = true;
-            cout << "\nCurrent Details:\n";
-            cout << "Name: " << doctorName[i] << " | Field: " << doctorField[i] << " | Salary: " << doctorSalary[i] << "\n";            
-            cout << "\nEnter New Details:\n";
-            cout << "Enter New Name: ";
-            cin.ignore(); 
-            getline(cin, doctorName[i]);
-            
-            cout << "Enter New Field/Specialization: ";
-            getline(cin, doctorField[i]);
-            
-            cout << "Enter New Salary: ";
-            cin >> doctorSalary[i];
+
+            cout << "\nCurrent Details:" << endl;
+            cout << "Name: " << doctorName[i] << " | Field: " << doctorField[i] << " | Salary: " << doctorSalary[i] << endl;
+
+            cout << "\nEnter New Details:" << endl;
+
+            doctorName[i] = readStringLine("Enter New Name: ");
+            doctorField[i] = readStringLine("Enter New Field/Specialization: ");
+
+            doctorSalary[i] = readInt("Enter New Salary: ");
+
+            while(doctorSalary[i] <= 0)
+            {
+                cout << "Kindly enter valid doctor salary." << endl;
+                doctorSalary[i] = readInt("Enter New Salary: ");
+            }
+
             D_saveToFile();
-            cout << "\nDoctor record updated successfully and saved to file!\n";
+
+            cout << "\nDoctor record updated successfully and saved to file!" << endl;
             break;
         }
     }
-    if (!found) {
+    if (!found) 
+    {
         cout << "\nError: Doctor with ID " << id << " not found.\n";
     }
 }
@@ -583,21 +590,22 @@ void updateDoctorRecord()
 
 void searchPatientsByDisease() 
 {
-    string disease;
-    /*cout << "\n====================================\n";
-    cout << "     SEARCH PATIENTS BY DISEASE\n";
-    cout << "====================================\n";*/
-    header(" SEARCH PATIENTS BY DISEASE");
-    cout << "Enter Disease Name to search: ";
-    cin.ignore();
-    getline(cin, disease);
+    header("SEARCH PATIENTS BY DISEASE");
+    if(totalPatient == 0)
+    {
+        cout << "There is no patient record in the hospital!" << endl;
+        return;
+    }
+
+    string disease = readStringLine("Enter Disease Name to search: ");
 
     bool found = false;
     cout << "\nMatching Patients:\n";
     cout << "------------------------------------\n";
     for (int i = 0; i < totalPatient; i++) 
     {
-        if (patientDisease[i] == disease) {
+        if (patientDisease[i] == disease) 
+        {
             cout << "ID: " << patientID[i] 
                  << " | Name: " << patientName[i] 
                  << " | Age: " << patientAge[i] << "\n";
@@ -606,21 +614,21 @@ void searchPatientsByDisease()
     }
 
     if (!found) {
-        cout << "No patients found suffering from \"" << disease << "\".\n";
+        cout << "No patients found suffering from " << disease << ".\n";
     }
 }
 //=================================================SEARCH DOCTOR BY FIELD=====================================================================
 void searchDoctorByField() 
 {
-    string field;
-    /*cout << "\n====================================\n";
-    cout << "      SEARCH DOCTORS BY FIELD\n";
-    cout << "====================================\n";*/
     header("SEARCH DOCTORS BY FIELD");
-    cout << "Enter Specialization/Field to search: ";
-    cin.ignore();
-    getline(cin, field);
+    
+    if(totalDoctors == 0)
+    {
+        cout << "There is no doctor record in the hospital!" << endl;
+        return;
+    }
 
+    string field = readStringLine("Enter Specialization/Field to search: ");
     bool found = false;
     cout << "\nMatching Doctors:\n";
     cout << "------------------------------------\n";
@@ -639,9 +647,6 @@ void searchDoctorByField()
 
 void viewHospitalStatistics() 
 {
-    /*cout << "\n====================================\n";
-    cout << "      HOSPITAL STATISTICS\n";
-    cout << "====================================\n";*/
     header("HOSPITAL STATISTICS");
     cout << "Total Registered Patients: " << totalPatient << " / 100\n";
     cout << "Total Active Doctors:      " << totalDoctors << " / 25\n";
@@ -657,23 +662,30 @@ void viewHospitalStatistics()
 
 void updateDoctorSalary() 
 {
-    int id;
-    /*cout << "\n====================================\n";
-    cout << "        UPDATE DOCTOR SALARY\n";
-    cout << "====================================\n";
-    cout << "Enter Doctor ID to update salary: ";*/
     header(" UPDATE DOCTOR SALARY");
-    cin >> id;
+    if(totalDoctors == 0)
+    {
+        cout << "There is no doctor record in the hospital to update salary!" << endl;
+        return;
+    }
+
+    int id = readInt("Enter Doctor ID to update salary: ");
     bool found = false;
     for (int i = 0; i < totalDoctors; i++) {
         if (doctorID[i] == id) 
         {
             found = true;
             cout << "\nCurrent Salary of Dr. " << doctorName[i] << " is: Rs. " << doctorSalary[i] << "\n";
-            cout << "Enter New Salary: ";
-            cin >> doctorSalary[i];
+            doctorSalary[i] = readInt("Enter new salary: ");
+            
+            while(doctorSalary[i] <= 0)
+            {
+                cout << "Kindly enter valid doctor salary." << endl;
+                doctorSalary[i] = readInt("Enter new salary: ");
+            }
+
             D_saveToFile();
-            cout << "\nSalary updated successfully and saved to file!\n";
+            cout << "\nSalary updated successfully and saved to file.\n";
             break;
         }
     }
@@ -707,39 +719,37 @@ void hospitalPayrollReport()
     cout << "==================================================\n";
 }
 
-
 //================================================PATIENT MENU======================================================
 void adminMenu()
 {
     int choice;
     do
     {
-        system("cls");
-        cout <<"\n ====================================" <<endl;
-        cout <<"Patient Management System! " <<endl;
-        cout << "=================================" <<endl;
-        cout << "1. Add New Patient Record!" <<endl;
-        cout << "2. Display All Patients!" <<endl;
-        cout << "3. Display Patient History!" <<endl;
-        cout << "4. Search Patient by name!" << endl;
-        cout << "5. Search patient by ID!" <<endl;
-        cout << "6. Remove Patient Record! " <<endl;
-        cout << "7. Update Patient Record!" <<endl;
-        cout << "8. Search Patient by Disease!" <<endl; 
-        cout << "9. Add Doctor!" <<endl;
-        cout << "10. View all Doctors!" <<endl;
-        cout << "11. View Doctor History!" <<endl;
-        cout << "12. Search Doctor by ID!" <<endl;
-        cout << "13. Search Doctor by Name! " <<endl;
-        cout << "14. Remove Doctor!" <<endl;
-        cout << "15. Update Doctor Record! " <<endl;
-        cout << "16. Search Doctors by field!" <<endl;
-        cout << "17. View Hospital's Statistics!" << endl;
-        cout << "18. Update Doctor Salary!" <<endl;
-        cout << "19. Hospital Payroll Report!" <<endl;
-        cout << "20. Exit....." <<endl;
+        clearScreen();
+        header("ADMIN MANAGEMENT SYSTEM");
+
+        cout << "1. Add New Patient Record" <<endl;
+        cout << "2. Display All Patients" <<endl;
+        cout << "3. Display Patient History" <<endl;
+        cout << "4. Search Patient by Name" << endl;
+        cout << "5. Search Patient by ID" <<endl;
+        cout << "6. Remove Patient Record " <<endl;
+        cout << "7. Update Patient Record" <<endl;
+        cout << "8. Search Patient by Disease" <<endl; 
+        cout << "9. Add Doctor" <<endl;
+        cout << "10. View All Doctors" <<endl;
+        cout << "11. View Doctor History" <<endl;
+        cout << "12. Search Doctor by ID" <<endl;
+        cout << "13. Search Doctor by Name" <<endl;
+        cout << "14. Remove Doctor" <<endl;
+        cout << "15. Update Doctor Record" <<endl;
+        cout << "16. Search Doctors by Field" <<endl;
+        cout << "17. View Hospital Statistics" << endl;
+        cout << "18. Update Doctor Salary" <<endl;
+        cout << "19. Hospital Payroll Report" <<endl;
+        cout << "20. Exit" <<endl;
         cout << "==========================================" <<endl;
-        choice = readInt("enter your choice (1-20) : ");
+        choice = readInt("Enter your choice (1-20) : ");
         switch(choice)
         {
             case 1:
@@ -819,23 +829,11 @@ void adminMenu()
                 pauseScreen();
                 break;
             case 20:
-                cout <<"Exiting Admin Portal......";
+                cout <<"Exiting Admin Portal...";
                 break;
             default:
-                cout << "invalid choice! kindy enter your choice between 1 and 20 only!";
+                cout << "Invalid choice! Kindly enter your choice between 1 and 20 only.";
+                pauseScreen();
         }
     }while(choice!=20);
 }
-/*int main()
-{
-    P_loadFromFile();
-    D_loadFromFile();
-    system("color 0E");
-    //addPatient();
-    //displayAllPatients();
-    //viewPatientHistory();
-    //removePatient();
-    adminMenu();
-    return 0;
-}
-*/
