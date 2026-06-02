@@ -3,3 +3,4 @@
 101 Asthama Inhaler
 101 Cancer A
 101 cancer a
+110 asthma levalbuterol

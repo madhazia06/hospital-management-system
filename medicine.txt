@@ -1,19 +1,19 @@
 1
 Paracetamol 500mg
 Getz Pharma
-19
+15
 25
 2027
 2
 Ibuprofen 400mg
 Bayer
-72
+69
 40
 2026
 3
 Amoxicillin 250mg
 GSK
-7
+0
 60
 2028
 4
@@ -94,3 +94,9 @@ Getz Pharma
 30
 170.69
 2026
+17
+amoxicillin
+biohealth industries
+8
+280
+2028
