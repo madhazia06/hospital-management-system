@@ -54,7 +54,7 @@ int main()
     {
         clearScreen();
         system("color 0A"); // Changes console text/background color
-        header("HOSPITAL MANAGEMENT SYSTEM");
+        header("CITY CARE HOSPITAL MANAGEMENT SYSTEM");
 
         // Main menu options
         cout << "1. Doctor Portal Login" << endl;

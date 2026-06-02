@@ -8,9 +8,9 @@ using namespace std;
 // This function displays a formatted heading/title
 void header(string title) 
 {
-    cout << "\n========================================\n";
+    cout << "\n=========================================================\n";
     cout << "         " << title << endl;
-    cout << "========================================\n";
+    cout << "=========================================================\n";
 }
 
 // This function clears the console screen

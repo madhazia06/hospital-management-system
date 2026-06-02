@@ -6,6 +6,7 @@
 #include "common.h"
 using namespace std;
 
+
 int patientID[100];
 string patientName[100];
 int patientAge[100];
@@ -133,8 +134,26 @@ void addPatient()
         cout << "Hospital's capacity is full"<<endl;
         return;
     }
-    
-    patientID[totalPatient]=totalPatient+1;
+    bool idExists;
+
+
+    do
+    {
+        idExists = false;
+        patientID[totalPatient] = readInt("Enter patient ID: ");
+
+        for(int i = 0; i < totalPatient; i++)
+        {
+            if(patientID[i] == patientID[totalPatient])
+            {
+                cout << "This patient ID already exists. Enter a different ID." << endl;
+                idExists = true;
+                break;
+            }
+        }
+
+    } while(idExists);
+
     patientName[totalPatient] = readStringLine("Enter patient name: ");
     patientAge[totalPatient] = readInt("Enter age of patient: ");
     
@@ -161,7 +180,24 @@ void addDoctor()
         return ;
     }
     
-    doctorID[totalDoctors] = totalDoctors + 1;
+    bool idExists;
+    do
+    {
+        idExists = false;
+
+        doctorID[totalDoctors] = readInt("Enter doctor ID: ");
+
+        for(int i = 0; i < totalDoctors; i++)
+        {
+            if(doctorID[i] == doctorID[totalDoctors])
+            {
+                cout << "This doctor ID already exists. Enter a different ID." << endl;
+                idExists = true;
+                break;
+            }
+        }
+
+    } while(idExists);
 
     doctorName[totalDoctors] = readStringLine("Enter doctor name: ");
 
