@@ -368,7 +368,7 @@ void searchPatientByName()
     string searchName;
     bool found = false;
     cout << "Enter Patient Name to search: ";
-    cin.ignore(); 
+    //cin.ignore(); 
     getline(cin, searchName);
     
     cout << "\n================ Search Results ================" << endl;
@@ -404,7 +404,7 @@ void searchDoctorByName()
     string searchName;
     bool found = false;
     cout << "Enter Doctor Name to search : ";
-    cin.ignore(); 
+    //cin.ignore(); 
     getline(cin, searchName);
     
     cout << "\n================ Search Results ================" << endl;
@@ -578,7 +578,7 @@ void updateDoctorRecord()
         cout << "\nError: Doctor with ID " << id << " not found.\n";
     }
 }
-//=================================================DEARCH PATIENT BY DISEASE=====================================================================
+//=================================================SEARCH PATIENT BY DISEASE=====================================================================
 
 void searchPatientsByDisease() 
 {
@@ -588,7 +588,7 @@ void searchPatientsByDisease()
     cout << "====================================\n";*/
     header(" SEARCH PATIENTS BY DISEASE");
     cout << "Enter Disease Name to search: ";
-    cin.ignore();
+    //cin.ignore();
     getline(cin, disease);
 
     bool found = false;
@@ -617,7 +617,7 @@ void searchDoctorByField()
     cout << "====================================\n";*/
     header("SEARCH DOCTORS BY FIELD");
     cout << "Enter Specialization/Field to search: ";
-    cin.ignore();
+    //cin.ignore();
     getline(cin, field);
 
     bool found = false;
