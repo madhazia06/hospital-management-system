@@ -19,5 +19,3 @@
 110 Claritek
 106 Panadol
 101 Inhaler
-101 A
-101 a
