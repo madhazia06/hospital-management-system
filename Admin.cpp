@@ -111,6 +111,7 @@ void D_loadFromFile()
 //===========================================================ADD PATIENT RECORD======================================================
 void addPatient()
 {
+    header("Add Patient Record!");
     if(totalPatient>=100)
     {
         cout << "hospitals' capacity is full!"<<endl;
@@ -157,6 +158,7 @@ void addPatient()
 //===========================================================ADD DOCTOR RECORD=======================================================
 void addDoctor()
 {
+    header("Add Doctor Record!");
     if(totalDoctors>=25)
     {
         cout << "hospitals' capacity is full!"<<endl;
@@ -181,6 +183,7 @@ void addDoctor()
 //=================================================DISPLAY ALL PATIENTS=====================================================================
 void displayAllPatients()
 {
+    header("Display All Patients!");
     if(totalPatient==0)
     {
         cout << "there is no patient in the hospital!"<<endl;
@@ -202,6 +205,7 @@ void displayAllPatients()
 //=================================================DISPLAY ALL DOCTORS======================================================================
 void displayAllDoctors()
 {
+    header("Display All Doctors!");
     if(totalDoctors==0)
     {
         cout << "there is no doctor in the hospital!"<<endl;
@@ -223,6 +227,7 @@ void displayAllDoctors()
 //=========================================================VIEW PATIENT HISTORY==============================================================
 void viewPatientHistory()
 {
+    header("View Patient History!");
     if(totalPatient==0)
     {
         cout << "there is not any patient's record in the hospital whom record can be searched!"<<endl;
@@ -255,6 +260,7 @@ void viewPatientHistory()
 //=========================================================vIEW DOCTOR HISTORY===============================================================
 void viewDoctorHistory()
 {
+    header("View Doctor History!");
     if(totalDoctors==0)
     {
         cout << "there is not any patient's record in the hospital whom record can be searched!"<<endl;
@@ -287,6 +293,7 @@ void viewDoctorHistory()
 //======================================================SEARCH PAATIENT BY ID==========================================================================
 void searchPatientById()
 {
+    header("Search Patient by ID!");
     if(totalPatient==0)
     {
         cout << "there is not any patient's record in the hospital whom record can be searched!"<<endl;
@@ -319,6 +326,7 @@ void searchPatientById()
 //=========================================================SEARCH DOCTOR BY ID===============================================================
 void searchDoctorById()
 {
+    header("Search Doctor by Name!");
     if(totalDoctors==0)
     {
         cout << "there is not any patient's record in the hospital whom record can be searched!"<<endl;
@@ -351,6 +359,7 @@ void searchDoctorById()
 
 void searchPatientByName()
 {
+    header("Search Patient by Name!");
     if(totalPatient == 0)
     {
         cout << "Hospital mein koi record nahi hai!" << endl;
@@ -386,6 +395,7 @@ void searchPatientByName()
 //=======================================================SEARCH DOCTOR BY NAME=========================================================================
 void searchDoctorByName()
 {
+    header("Search Doctor by Name!");
     if(totalDoctors == 0)
     {
         cout << "There is not any Doctor in the hospital!" << endl;
@@ -398,6 +408,7 @@ void searchDoctorByName()
     getline(cin, searchName);
     
     cout << "\n================ Search Results ================" << endl;
+    
     for(int i = 0; i < totalDoctors; i++)
     {
         if(doctorName[i] == searchName)
@@ -427,8 +438,9 @@ void removePatient()
         return;
     }
     int deleteID;
-    cout <<"\n============================================" <<endl;
-    cout << "======= Remove Patient Record! ========" <<endl;
+    //cout <<"\n============================================" <<endl;
+    //cout << "======= Remove Patient Record! ========" <<endl;
+    header("Remove Patient Record");
     cout << "enter patient ID to remove: ";
     cin >> deleteID;
     int foundIndex=-1;
@@ -465,9 +477,10 @@ void removeDoctor()
         return;
     }
     int deleteID;
-    cout <<"\n============================================" <<endl;
-    cout << "======= Remove Doctor Record! ========" <<endl;
-    cout << "enter Doctor ID to remove: ";
+    //cout <<"\n============================================" <<endl;
+    //cout << "======= Remove Doctor Record! ========" <<endl;
+    //cout << "enter Doctor ID to remove: ";
+    header("Remove Doctor Record!");
     cin >> deleteID;
     int foundIndex=-1;
     for(int i=0; i<totalDoctors; i++)
@@ -499,9 +512,7 @@ void removeDoctor()
 void updatePatientRecord() 
 {
     int id;
-    cout << "\n====================================\n";
-    cout << "      UPDATE PATIENT RECORD\n";
-    cout << "====================================\n";
+    header("UPDATE PATIENT RECORD");
     cout << "Enter Patient ID to update: ";
     cin >> id;
 
@@ -537,9 +548,10 @@ void updatePatientRecord()
 void updateDoctorRecord() 
 {
     int id;
-    cout << "\n====================================\n";
+    /*cout << "\n====================================\n";
     cout << "       UPDATE DOCTOR RECORD\n";
-    cout << "====================================\n";
+    cout << "====================================\n";*/
+    header("UPDATE DOCTOR RECORD");
     cout << "Enter Doctor ID to update: ";
     cin >> id;
     bool found = false;
@@ -572,9 +584,10 @@ void updateDoctorRecord()
 void searchPatientsByDisease() 
 {
     string disease;
-    cout << "\n====================================\n";
+    /*cout << "\n====================================\n";
     cout << "     SEARCH PATIENTS BY DISEASE\n";
-    cout << "====================================\n";
+    cout << "====================================\n";*/
+    header(" SEARCH PATIENTS BY DISEASE");
     cout << "Enter Disease Name to search: ";
     cin.ignore();
     getline(cin, disease);
@@ -600,9 +613,10 @@ void searchPatientsByDisease()
 void searchDoctorByField() 
 {
     string field;
-    cout << "\n====================================\n";
+    /*cout << "\n====================================\n";
     cout << "      SEARCH DOCTORS BY FIELD\n";
-    cout << "====================================\n";
+    cout << "====================================\n";*/
+    header("SEARCH DOCTORS BY FIELD");
     cout << "Enter Specialization/Field to search: ";
     cin.ignore();
     getline(cin, field);
@@ -625,9 +639,10 @@ void searchDoctorByField()
 
 void viewHospitalStatistics() 
 {
-    cout << "\n====================================\n";
+    /*cout << "\n====================================\n";
     cout << "      HOSPITAL STATISTICS\n";
-    cout << "====================================\n";
+    cout << "====================================\n";*/
+    header("HOSPITAL STATISTICS");
     cout << "Total Registered Patients: " << totalPatient << " / 100\n";
     cout << "Total Active Doctors:      " << totalDoctors << " / 25\n";
     cout << "------------------------------------\n";
@@ -643,10 +658,11 @@ void viewHospitalStatistics()
 void updateDoctorSalary() 
 {
     int id;
-    cout << "\n====================================\n";
+    /*cout << "\n====================================\n";
     cout << "        UPDATE DOCTOR SALARY\n";
     cout << "====================================\n";
-    cout << "Enter Doctor ID to update salary: ";
+    cout << "Enter Doctor ID to update salary: ";*/
+    header(" UPDATE DOCTOR SALARY");
     cin >> id;
     bool found = false;
     for (int i = 0; i < totalDoctors; i++) {
