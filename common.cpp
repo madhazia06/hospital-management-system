@@ -31,7 +31,8 @@ void clearInput()
 void pauseScreen() 
 {
     cout << "\nPress Enter to continue...";
-    system("pause > nul");
+    cin.ignore(1000, '\n');
+    cin.get();
 }
 
 // This function safely takes integer input from user
