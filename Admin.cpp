@@ -135,9 +135,9 @@ void addPatient()
         }
     }while(alreadyexists);*/
     patientID[totalPatient]=totalPatient+1;
-    cin.ignore();
+    //cin.ignore();
     cout << "enter patient name : ";
-    getline(cin,patientName[totalPatient]);
+    getline(cin>>ws,patientName[totalPatient]);
     cout << "enter age of patient : ";
     cin >>patientAge[totalPatient];
      while(patientAge[totalPatient]<=0||patientAge[totalPatient]>200)
@@ -145,12 +145,12 @@ void addPatient()
         cout <<"kindly enter valid patient age : ";
         cin >> patientAge[totalPatient];
     }
-    cin.ignore();
+    //cin.ignore();
     cout << "enter disease of patient : ";
-    getline(cin,patientDisease[totalPatient]);
+    getline(cin>>ws,patientDisease[totalPatient]);
     cout << "enter history of patient : ";
     //cin.ignore();
-    getline (cin, patientHitory[totalPatient]);
+    getline (cin>>ws, patientHitory[totalPatient]);
     totalPatient++;
     P_saveToFile();
     cout << "Patient's record add successfully  to file!" << endl;
@@ -167,13 +167,13 @@ void addDoctor()
     cout <<"-----enter new doctor record-----"<<endl;
     doctorID[totalDoctors]=totalDoctors+1;
     cout << "enter Doctor name : ";
-    cin.ignore();
-    getline(cin,doctorName[totalDoctors]);
+    //cin.ignore();
+    getline(cin>>ws,doctorName[totalDoctors]);
     cout << "enter salary of the doctor : " ;
     cin >> doctorSalary[totalDoctors];
     cout << "enter field of the doctor : " ;
-    cin.ignore();
-    getline(cin,doctorField[totalDoctors]);
+    //cin.ignore();
+    getline(cin>>ws,doctorField[totalDoctors]);
     totalDoctors++;
     D_saveToFile();
     cout << "Doctor's record add successfully to file!" << endl;
@@ -368,8 +368,8 @@ void searchPatientByName()
     string searchName;
     bool found = false;
     cout << "Enter Patient Name to search: ";
-    cin.ignore(); 
-    getline(cin, searchName);
+    //cin.ignore(); 
+    getline(cin>>ws, searchName);
     
     cout << "\n================ Search Results ================" << endl;
     for(int i = 0; i < totalPatient; i++)
@@ -404,8 +404,8 @@ void searchDoctorByName()
     string searchName;
     bool found = false;
     cout << "Enter Doctor Name to search : ";
-    cin.ignore(); 
-    getline(cin, searchName);
+    //cin.ignore(); 
+    getline(cin>>ws, searchName);
     
     cout << "\n================ Search Results ================" << endl;
     
@@ -479,8 +479,8 @@ void removeDoctor()
     int deleteID;
     //cout <<"\n============================================" <<endl;
     //cout << "======= Remove Doctor Record! ========" <<endl;
-    //cout << "enter Doctor ID to remove: ";
     header("Remove Doctor Record!");
+    cout << "enter Doctor ID to remove: ";
     cin >> deleteID;
     int foundIndex=-1;
     for(int i=0; i<totalDoctors; i++)
@@ -525,15 +525,15 @@ void updatePatientRecord()
             
             cout << "\nEnter New Details:\n";
             cout << "Enter New Name: ";
-            cin.ignore();
-            getline(cin, patientName[i]);
+            //cin.ignore();
+            getline(cin>>ws, patientName[i]);
             cout << "Enter New Age: ";
             cin >> patientAge[i];
             cout << "Enter New Disease: ";
-            cin.ignore();
-            getline(cin, patientDisease[i]);
+            //cin.ignore();
+            getline(cin>>ws, patientDisease[i]);
             cout << "Enter New History: ";
-            getline(cin, patientHitory[i]);
+            getline(cin>>ws, patientHitory[i]);
             P_saveToFile();
             cout << "\nPatient record updated successfully and saved to file!\n";
             break;
@@ -562,12 +562,11 @@ void updateDoctorRecord()
             cout << "Name: " << doctorName[i] << " | Field: " << doctorField[i] << " | Salary: " << doctorSalary[i] << "\n";            
             cout << "\nEnter New Details:\n";
             cout << "Enter New Name: ";
-            cin.ignore(); 
-            getline(cin, doctorName[i]);
+            //cin.ignore(); 
+            getline(cin>>ws, doctorName[i]);
             
             cout << "Enter New Field/Specialization: ";
-            getline(cin, doctorField[i]);
-            
+            getline(cin>>ws, doctorField[i]);
             cout << "Enter New Salary: ";
             cin >> doctorSalary[i];
             D_saveToFile();
@@ -589,8 +588,8 @@ void searchPatientsByDisease()
     cout << "====================================\n";*/
     header(" SEARCH PATIENTS BY DISEASE");
     cout << "Enter Disease Name to search: ";
-    cin.ignore();
-    getline(cin, disease);
+    //cin.ignore();
+    getline(cin>>ws, disease);
 
     bool found = false;
     cout << "\nMatching Patients:\n";
@@ -618,8 +617,8 @@ void searchDoctorByField()
     cout << "====================================\n";*/
     header("SEARCH DOCTORS BY FIELD");
     cout << "Enter Specialization/Field to search: ";
-    cin.ignore();
-    getline(cin, field);
+    //cin.ignore();
+    getline(cin>>ws, field);
 
     bool found = false;
     cout << "\nMatching Doctors:\n";
